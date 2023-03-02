@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jnanam/card_payment/card_view.dart';
+import '../card_payment/card_view.dart';
 import '../routes/appRoutes.dart';
 import '../utils/customWidgets.dart';
 import 'mobile_details_controller.dart';
