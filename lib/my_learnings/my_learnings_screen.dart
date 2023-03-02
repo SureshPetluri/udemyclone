@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:udemy_clone_ui/home/home_controller.dart';
-import 'package:udemy_clone_ui/routes/appRoutes.dart';
-import 'package:udemy_clone_ui/utils/customWidgets.dart';
+
+import '../home/home_controller.dart';
+import '../routes/appRoutes.dart';
+import '../utils/customWidgets.dart';
 
 class MyLearningsScreen extends StatelessWidget {
   const MyLearningsScreen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class MyLearningsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(AppRoutes.myLearnings),
+      appBar: AppBar(title: AppBarCont(route:AppRoutes.myLearnings,),),
       body: GetBuilder<HomeController>(
         init: HomeController(),
         builder: (controller) => Padding(

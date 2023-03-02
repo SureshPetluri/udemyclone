@@ -1,41 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:udemy_clone_ui/routes/appRoutes.dart';
-import 'package:udemy_clone_ui/signin/signin_controller.dart';
-import 'package:udemy_clone_ui/utils/customWidgets.dart';
-import 'package:udemy_clone_ui/utils/validations.dart';
+import '../repositories/sign_in_repository.dart';
+import '../utils/validations.dart';
+import 'signin_controller.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(AppRoutes.signIn),
-      // backgroundColor: Colors.blue,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-        child: GetBuilder<SignInController>(
-            builder: (controller) {
-              return Container(
-                height: Get.height,
-                child: Form(
+    return GetBuilder<LoginController>(
+      init: LoginController(),
+      builder: (controller) => ScaleTransition(
+        scale: controller.scaleAnimation,
+        child: AlertDialog(
+          title: ListTile(
+            leading: TextButton(
+                onPressed: () {
+                  controller.screenSet("Login");
+                },
+                child: const Text('Login')),
+            trailing: TextButton(
+                onPressed: () {
+                  controller.screenSet("SignUp");
+                },
+                child: const Text('SignUp')),
+          ),
+          content: controller.setPage == "Login"
+              ? Form(
                   key: controller.formKey,
                   child: Column(
-                    // mainAxisAlignment : MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // Image.asset(
-                      //   "assests/ffflll.png",
-                      //   height: 50,
-                      // ),
-                      Spacer(),
                       TextFormField(
                         controller: controller.userNameController,
                         validator: Validations.fieldIsEmail,
-                        decoration: const InputDecoration(hintText: "Email"),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Email"),
                       ),
                       const SizedBox(
                         height: 20,
@@ -43,23 +48,91 @@ class SignInScreen extends StatelessWidget {
                       TextFormField(
                         controller: controller.passwordController,
                         validator: Validations.fieldIsPw,
-                        decoration: const InputDecoration(hintText: "Password"),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Password"),
+                      ),
+                    ],
+                  ),
+                )
+              : Form(
+                  key: controller.signUPFormKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextFormField(
+                        controller: controller.signUpEmailController,
+                        validator: Validations.fieldIsEmail,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Email"),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            controller.loginData();
-
-                          },
-                          child: const Text("Submit")),
-                      Spacer(),
+                      TextFormField(
+                        controller: controller.signUpMobileController,
+                        validator: Validations.nullOnFieldNotEmpty,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Mobile"),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: controller.signUpPasswordController,
+                        validator: Validations.fieldIsPw,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Password"),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: controller.conformPasswordController,
+                        validator: Validations.fieldIsPw,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Conform Password"),
+                      ),
                     ],
                   ),
                 ),
-              );
-            }),
+          actions: [
+            controller.setPage == "Login"
+                ? TextButton(
+                    child: const Text("Login"),
+                    onPressed: () {
+                      controller.loginValidations(context);
+                    })
+                : TextButton(
+                    child: const Text("SignUp"),
+                    onPressed: () {
+                      controller.signUpValidations(context);
+                    }),
+            TextButton(
+              child: const Text("Close"),
+              onPressed: () => controller.inToHomeLogIn(context),
+            ),
+          ],
+        ),
       ),
     );
   }

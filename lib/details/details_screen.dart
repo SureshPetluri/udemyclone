@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:udemy_clone_ui/details/details_controller.dart';
-import 'package:udemy_clone_ui/routes/appRoutes.dart';
-import 'package:udemy_clone_ui/utils/customWidgets.dart';
+import '../card_payment/card_view.dart';
+import '../mobile_details/mobile_detail_screen.dart';
+import '../routes/appRoutes.dart';
+import '../utils/customWidgets.dart';
+import 'details_controller.dart';
+
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(AppRoutes.details),
+    print("width details ${Get.width}");
+    return Get.width >825 ?Scaffold(
+      appBar: AppBar(title: AppBarCont(route:AppRoutes.details),),
       body: GetBuilder<DetailsController>(
           init: DetailsController(),
           builder: (controller) => SingleChildScrollView(
@@ -122,6 +126,7 @@ class DetailsScreen extends StatelessWidget {
                                 ),
                                 Container(
                                   height: 250,
+                                  margin: EdgeInsets.only(left: 10.0),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(3.0),
                                       border: Border.all(color: Colors.black)),
@@ -253,14 +258,9 @@ class DetailsScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      InkWell(
-                                        child: Image.asset(
-                                          "assests/images/charminar.jpg",
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onTap: () {
-                                          Get.toNamed(AppRoutes.learn);
-                                        },
+                                      Image.asset(
+                                        "assests/images/charminar.jpg",
+                                        fit: BoxFit.cover,
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -279,7 +279,7 @@ class DetailsScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Container(
+                                      /*Container(
                                         width: 250,
                                         height: 45,
                                         child: MaterialButton(
@@ -290,7 +290,7 @@ class DetailsScreen extends StatelessWidget {
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w700)),
                                         ),
-                                      ),
+                                      ),*/
                                       Container(
                                         margin: EdgeInsets.only(top: 18),
                                         width: 250,
@@ -301,7 +301,9 @@ class DetailsScreen extends StatelessWidget {
                                             border: Border.all(
                                                 color: Colors.black)),
                                         child: MaterialButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Get.dialog(const CardScreen());
+                                          },
                                           child: Text(
                                             "Buy Now",
                                             style: TextStyle(
@@ -342,7 +344,7 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
               )),
-    );
+    ):MobileDetailsScreen();
   }
 
   ListTile buildListTile(String text, IconData icon) {

@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:udemy_clone_ui/routes/appPages.dart';
-import 'package:udemy_clone_ui/routes/appRoutes.dart';
-import 'package:udemy_clone_ui/signin/signin_view.dart';
+import 'routes/appPages.dart';
+import 'routes/appRoutes.dart';
 
-import 'details/details_screen.dart';
-import 'home/home_screen.dart';
+
 
 void main() async {
   runApp(const MyApp());
@@ -32,7 +29,7 @@ class MyApp extends StatelessWidget{
       theme: buildTheme(context),
       getPages: AppPages.pages,
       initialRoute: AppRoutes.home,
-      // home: HomeScreen(),
+      //  home: MyHomePage(),
     );
   }
 
@@ -51,7 +48,7 @@ class MyApp extends StatelessWidget{
                     (states) => Colors.blue)),
       ),
       colorScheme:
-      ColorScheme.light().copyWith(primary: Color(0xff8A8686)),
+      const ColorScheme.light().copyWith(primary: const Color(0xff8A8686)),
     );
   }
 
@@ -59,38 +56,37 @@ class MyApp extends StatelessWidget{
     return themeData.appBarTheme.copyWith(
       titleSpacing: 5.0,
       elevation: 0,
-      iconTheme: IconThemeData(color: Colors.black),
-      color: Color(0xfff5f8ff),
-      titleTextStyle: TextStyle(
+      iconTheme: const IconThemeData(color: Colors.black),
+      color: const Color(0xfff5f8ff),
+      titleTextStyle: const TextStyle(
           fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
-      toolbarTextStyle: TextStyle(color: Colors.black),
+      toolbarTextStyle: const TextStyle(color: Colors.black),
     );
   }
 
   InputDecorationTheme buildInputDecorationTheme(ThemeData themeData) {
     return themeData.inputDecorationTheme.copyWith(
       filled: true,
-      fillColor: Color(0xffE9EFFF),
-      border: OutlineInputBorder(
+      fillColor: const Color(0xffE9EFFF),
+      border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(7),
         ),
-
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Colors.red,
           width: 1.0,
         ),
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(7),
         ),
       ),
       // hintStyle: AppTextTheme.robotoHintTextStyle,
-      contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
     );
   }
 }

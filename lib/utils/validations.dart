@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 
 class Validations{
 
-  static String? nullOnfieldNotEmpty(value) => value.isEmpty ? 'Cannot be empty' : null;
+  static String? nullOnFieldNotEmpty(value) => value.isEmpty ? 'Cannot be empty' : null;
 
   /// Method to validate whether the field is of email or not.
   static String? fieldIsEmail(String? value) {
-    var isEmptyValidation = nullOnfieldNotEmpty(value);
+    var isEmptyValidation = nullOnFieldNotEmpty(value);
 
     var boolStringNotEmpty = isEmptyValidation == null;
     if (boolStringNotEmpty) {
@@ -23,7 +23,7 @@ class Validations{
 
   /// Method to validate whether the field is of password or not.
   static String? fieldIsPw(String? value) {
-    var isEmptyValidation = nullOnfieldNotEmpty(value);
+    var isEmptyValidation = nullOnFieldNotEmpty(value);
     var boolStringNotEmpty = isEmptyValidation == null;
     if (boolStringNotEmpty) {
       if (isPassword(value!)) {

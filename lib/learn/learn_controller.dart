@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:video_player/video_player.dart';
 
 class LearnController extends GetxController {
@@ -9,9 +8,25 @@ class LearnController extends GetxController {
   bool? isPaused;
   String? startTime = "";
   String? endTime = "";
+  Future<void>? initializeVideoPlayerFuture;
 
  List<Map<String,dynamic>> listMap=[
    {
+     "introduction":"introduction description",
+     "introductionUrl":"Url"
+   },{
+     "introduction":"introduction description",
+     "introductionUrl":"Url"
+   },{
+     "introduction":"introduction description",
+     "introductionUrl":"Url"
+   },{
+     "introduction":"introduction description",
+     "introductionUrl":"Url"
+   },{
+     "introduction":"introduction description",
+     "introductionUrl":"Url"
+   },{
      "introduction":"introduction description",
      "introductionUrl":"Url"
    },{
@@ -37,7 +52,7 @@ class LearnController extends GetxController {
   void onInit() {
     videoInitialization();
     videoController?.addListener(() {});
-    update();
+    // update();
     super.onInit();
   }
 
@@ -52,14 +67,16 @@ class LearnController extends GetxController {
 
   videoInitialization() async {
     var url =
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+        "assests/video/pharmascience.mp4";
     videoController = VideoPlayerController.network(
       url,
     );
-    await videoController?.initialize();
+    // await videoController?.initialize();
+    initializeVideoPlayerFuture = videoController?.initialize();
      await videoController?.play();
-    // await videoController?.seekTo(60.seconds);
+    await videoController?.seekTo(60.seconds);
     videoController?.setLooping(false);
+
     update();
   }
 
@@ -74,5 +91,12 @@ class LearnController extends GetxController {
         ? videoController?.pause()
         : videoController?.play();
     update();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    videoController?.dispose();
+    super.dispose();
   }
 }

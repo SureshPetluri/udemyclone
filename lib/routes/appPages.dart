@@ -1,17 +1,20 @@
 
 
 import 'package:get/get.dart';
-import 'package:udemy_clone_ui/details/details_binding.dart';
-import 'package:udemy_clone_ui/details/details_screen.dart';
-import 'package:udemy_clone_ui/home/home_binding.dart';
-import 'package:udemy_clone_ui/home/home_screen.dart';
-import 'package:udemy_clone_ui/learn/learnScreen.dart';
-import 'package:udemy_clone_ui/learn/learn_binding.dart';
-import 'package:udemy_clone_ui/my_learnings/my_learnings_binding.dart';
-import 'package:udemy_clone_ui/my_learnings/my_learnings_screen.dart';
-import 'package:udemy_clone_ui/routes/appRoutes.dart';
-import 'package:udemy_clone_ui/signin/signin_binding.dart';
-import 'package:udemy_clone_ui/signin/signin_view.dart';
+
+import '../card_payment/card_binding.dart';
+import '../card_payment/card_view.dart';
+import '../details/details_binding.dart';
+import '../details/details_screen.dart';
+import '../home/home_binding.dart';
+import '../home/home_screen.dart';
+import '../learn/learnScreen.dart';
+import '../learn/learn_binding.dart';
+import '../mobile_details/mobile_detail_screen.dart';
+import '../mobile_details/mobile_details_binding.dart';
+import '../my_learnings/my_learnings_binding.dart';
+import '../my_learnings/my_learnings_screen.dart';
+import 'appRoutes.dart';
 
 class AppPages {
   static getPageWithTransition(
@@ -20,7 +23,7 @@ class AppPages {
           Bindings? binding,
           List<Bindings>? bindings,
           transition = Transition.rightToLeft,
-          duration = 250}) =>
+          duration = 750}) =>
       GetPage(
           name: name!,
           page: page!,
@@ -38,30 +41,30 @@ class AppPages {
     //     transition: Transition.fade),
 
     /// Terms And Conditions page
-    // getPageWithTransition(
-    //   name: AppRoutes.terms,
-    //   page: () => TermsAndConditionsPage(),
-    //   binding: TermsAndConditionsBinding(),
-    // ),
+    getPageWithTransition(
+      name: AppRoutes.cardScreen,
+      page: () => CardScreen(),
+      binding: CardBinding(),
+    ),
 
     /// Login Page
     getPageWithTransition(
-        name: AppRoutes.signIn,
-        page: () => const SignInScreen(),
-        binding: SignInBinding(),
+        name: AppRoutes.mobileDetails,
+        page: () =>  MobileDetailsScreen(),
+        binding: MobileDetailsBinding(),
         duration: 0),
 
     /// Install bottom nav Page
     getPageWithTransition(
       name: AppRoutes.home,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
       binding: HomeBinding(),
     ),
 
     /// Install bottom nav Page
     getPageWithTransition(
       name: AppRoutes.learn,
-      page: () => LearnScreen(),
+      page: () =>  LearnScreen(),
       binding: LearnBinding(),
     ),
 

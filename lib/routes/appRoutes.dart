@@ -4,4 +4,6 @@ class AppRoutes {
   static const myLearnings = '/myLearnings';
   static const details = '/details';
   static const learn = '/learn';
+  static const mobileDetails = '/mobileDetails';
+  static const cardScreen = '/cardScreen';
 }
